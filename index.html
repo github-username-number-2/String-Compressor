@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 
+<!--
+  made by luke baja ricketts
+-->
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
@@ -8,13 +12,53 @@
 </head>
 
 <body>
-	<script src="crypto.js">
+  <script src="main.min.js" type="module">
 
 	</script>
-	<p id="res"></p>
-	<script src="main.js" type="module">
+  <script>
+    //in browser
+    onload = function () {
+      const string = "dddddddaaaaaaaaddddddddaaaaaaa";
+      
+      CL.compress(string, {
+        searchLength: 50,
+        //max number of characters to be searched
+        //set to "full" or leave blank to search every possible combination (very slow for long strings)
+        
+        progressUpdate: function (state, progress, compressionNum, compressionPower) {
+          console.log(state);
+          //current state
 
-	</script>
+          console.log(progress);
+          //progress in current state
+
+          console.log(compressionNum);
+          //number of times string has been re-compressed
+
+          console.log(compressionPower);
+          //current compression power
+        }
+      }).then(res => {
+        console.log("\n\n\n");
+        
+        console.log(res.compressed);
+        //whether or not the compressed value was shorter than the original
+        
+        console.log(res.value);
+        //returns shortest string, compressed or original
+        
+        console.log(res.compressionPower);
+        //original length - compressed length, null if original was shorter
+
+        console.log(
+          CL.decompress(res.value)
+        );
+      });
+    }
+    //in browser
+
+    //Node JS examples: https://repl.it/@lilpeen/String-Compressor-Node-JS
+  </script>
 </body>
 
 </html>
