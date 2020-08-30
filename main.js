@@ -1,3 +1,7 @@
+/*
+  made by luke baja
+*/
+
 !function () {
 	const isBrowser = new Function("try{return this===window;}catch(e){return false;}")();
 
